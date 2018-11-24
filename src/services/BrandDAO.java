@@ -5,7 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collection;
 import models.Brand;
+import java.util.*;
 
 /**
  *
@@ -43,8 +45,14 @@ public class BrandDAO {
         while(rs.next()){
             this.brandList.add(new Brand(this.rs.getInt("cod_marca"),this.rs.getString("nm_marca")));
         }
+        Collections.sort(this.brandList,new Comparator<Brand>(){
+            public int compare(Brand b1, Brand b2){
+                return b1.getBrandCode() - b2.getBrandCode(); 
+            }
+        });
         return this.brandList;
     }
+    
     
     public int removeBrand(int brandCode) throws SQLException{
         String sql = "delete from marca where cod_marca = " + brandCode;
@@ -61,8 +69,10 @@ public class BrandDAO {
         return this.rs.rowInserted();
     }
     
-    public void updateBrand(int brandCode,String brandName) {
-        
+    public void updateBrand(int brandCode,String newBrandName) throws SQLException {
+        String sql = "UPDATE marca SET nm_marca = '" + newBrandName + "' where cod_marca = " + brandCode;
+        this.executeSQLDml(sql);
+        this.getBrands();
         
     }
     
