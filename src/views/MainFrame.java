@@ -12,10 +12,12 @@ import javax.swing.table.DefaultTableModel;
 import models.Beer;
 import models.BeerStyle;
 import models.Brand;
+import models.Client;
 import services.BeerDAO;
 import services.DBConnetion;
 import net.proteanit.sql.DbUtils;
 import services.BrandDAO;
+import services.ClientDAO;
 import services.StyleDAO;
 /**
  *
@@ -27,16 +29,20 @@ public class MainFrame extends javax.swing.JFrame {
     BeerDAO beerDAO;
     BrandDAO brandDAO;
     StyleDAO styleDAO;
+    ClientDAO clientDAO;
     
-    public MainFrame(Connection con,BeerDAO beerDAO,BrandDAO brandDAO,StyleDAO styleDAO) throws SQLException {
+    public MainFrame(Connection con,BeerDAO beerDAO,BrandDAO brandDAO,StyleDAO styleDAO,ClientDAO clientDAO) throws SQLException {
         initComponents();
         this.setLocation(400, 200);
         this.dbConnection = con;
         this.beerDAO = beerDAO;
         this.brandDAO = brandDAO;
         this.styleDAO = styleDAO;
+        this.clientDAO = clientDAO;
+        
         this.FillBrandTable(this.brandDAO.getBrandList(),this.brands_table);
         this.FillStyleTable(this.styleDAO.getBeerStyleList());
+        this.FillClientTable(this.clientDAO.getClientList());
     }
     
     public void FillBrandTable(ArrayList<Brand> brandList,JTable table){
@@ -59,6 +65,18 @@ public class MainFrame extends javax.swing.JFrame {
         for(BeerStyle style:styleList){
             System.out.println(style.toString());
             Object[] row = {style.getBeerStyleCode(),style.getBeerStyleName()};
+            tableModel.addRow(row);
+        }
+    }
+    
+    public void FillClientTable(ArrayList<Client> clientList){
+        this.clients_table.setModel(new DefaultTableModel());
+        String col[] = {"cpf","nome","telefone","email"};
+        DefaultTableModel tableModel = new DefaultTableModel(col, 0);
+        this.clients_table.setModel(tableModel);
+        for(Client client:clientList){
+            System.out.println(client.toString());
+            Object[] row = {client.getCpf(),client.getName(),client.getPhoneNumber(),client.getEmail()};
             tableModel.addRow(row);
         }
     }
@@ -89,6 +107,15 @@ public class MainFrame extends javax.swing.JFrame {
         editStyle_btn = new javax.swing.JButton();
         editStyleName_txtField = new javax.swing.JTextField();
         editStyleCode_txtField = new javax.swing.JTextField();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        clients_table = new javax.swing.JTable();
+        addClient_btn = new javax.swing.JButton();
+        addClientEmail_txtField = new javax.swing.JTextField();
+        addClientPhone_txtField = new javax.swing.JTextField();
+        addClientName_txtField = new javax.swing.JTextField();
+        addClientCpf_txtField = new javax.swing.JTextField();
+        removeClient_btn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -224,26 +251,27 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 541, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 541, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addComponent(styleCode_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(styleName_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(addStyle_btn))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(editStyleCode_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(editStyleName_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(editStyle_btn)
                                 .addGap(18, 18, 18)
-                                .addComponent(removeStyle_btn)))))
+                                .addComponent(removeStyle_btn))))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(styleCode_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(styleName_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(addStyle_btn)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -269,6 +297,76 @@ public class MainFrame extends javax.swing.JFrame {
         );
 
         jTabbedPane1.addTab("Styles", jPanel3);
+
+        clients_table.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "cpf", "nome", "telefone", "email"
+            }
+        ));
+        jScrollPane3.setViewportView(clients_table);
+
+        addClient_btn.setText("Add");
+        addClient_btn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                addClient_btnMouseReleased(evt);
+            }
+        });
+
+        removeClient_btn.setText("Remove");
+        removeClient_btn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                removeClient_btnMouseReleased(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 541, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(addClientCpf_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(addClientName_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(addClientPhone_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(addClientEmail_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(addClient_btn))
+                            .addComponent(removeClient_btn, javax.swing.GroupLayout.Alignment.TRAILING))))
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(7, 7, 7)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addClient_btn)
+                    .addComponent(addClientEmail_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addClientPhone_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addClientName_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addClientCpf_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(removeClient_btn)
+                .addContainerGap(76, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Clients", jPanel2);
 
         javax.swing.GroupLayout jInternalFrame2Layout = new javax.swing.GroupLayout(jInternalFrame2.getContentPane());
         jInternalFrame2.getContentPane().setLayout(jInternalFrame2Layout);
@@ -404,6 +502,39 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_editStyle_btnMouseReleased
 
+    private void addClient_btnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addClient_btnMouseReleased
+        // TODO add your handling code here:
+        String clientCpf = this.addClientCpf_txtField.getText();
+        String clientName = this.addClientName_txtField.getText();
+        String clientPhone = this.addClientPhone_txtField.getText();
+        String clientEmail = this.addClientEmail_txtField.getText();
+        
+        try {
+            this.clientDAO.addClient(clientCpf, clientName, clientPhone, clientEmail);
+            this.FillClientTable(this.clientDAO.getClientList());
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(rootPane, ex);
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_addClient_btnMouseReleased
+
+    private void removeClient_btnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removeClient_btnMouseReleased
+        // TODO add your handling code here:
+        if(this.clients_table.getSelectedRow() != -1){
+            DefaultTableModel model = (DefaultTableModel) this.clients_table.getModel();
+    //        model.removeRow(this.brands_table.getSelectedRow());
+//            System.out.println((int)model.getValueAt(this.clients_table.getSelectedRow(),0));
+            try {
+                System.out.println(this.clientDAO.removeClient((String) model.getValueAt(this.clients_table.getSelectedRow(),0)));
+                this.FillClientTable(this.clientDAO.getClientList());
+            } catch (SQLException ex) {
+                System.out.println("sdf: "+ex.getMessage());
+                JOptionPane.showMessageDialog(rootPane, ex);
+                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_removeClient_btnMouseReleased
+
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -435,7 +566,7 @@ public class MainFrame extends javax.swing.JFrame {
                 try {
                     
                     Connection dbCon = DBConnetion.connect();
-                    new MainFrame(dbCon,new BeerDAO(dbCon), new BrandDAO(dbCon),new StyleDAO(dbCon)).setVisible(true);
+                    new MainFrame(dbCon,new BeerDAO(dbCon), new BrandDAO(dbCon),new StyleDAO(dbCon), new ClientDAO(dbCon)).setVisible(true);
                     
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -449,10 +580,16 @@ public class MainFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addBrand_btn;
+    private javax.swing.JTextField addClientCpf_txtField;
+    private javax.swing.JTextField addClientEmail_txtField;
+    private javax.swing.JTextField addClientName_txtField;
+    private javax.swing.JTextField addClientPhone_txtField;
+    private javax.swing.JButton addClient_btn;
     private javax.swing.JButton addStyle_btn;
     private javax.swing.JTextField brandCode_txtField;
     private javax.swing.JTextField brandName_txtField;
     private javax.swing.JTable brands_table;
+    private javax.swing.JTable clients_table;
     private javax.swing.JTextField editBrandCode_txtField;
     private javax.swing.JTextField editBrandName_txtField;
     private javax.swing.JTextField editStyleCode_txtField;
@@ -461,10 +598,13 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton edit_btn;
     private javax.swing.JInternalFrame jInternalFrame2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JButton removeClient_btn;
     private javax.swing.JButton removeStyle_btn;
     private javax.swing.JButton remove_btn;
     private javax.swing.JTextField styleCode_txtField;
