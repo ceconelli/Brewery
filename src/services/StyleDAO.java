@@ -20,9 +20,10 @@ public class StyleDAO {
     private ResultSet rs;
     private ArrayList<BeerStyle> beerStyleList;
     
-    public StyleDAO(Connection con){
+    public StyleDAO(Connection con) throws SQLException{
         this._dbConnection = con;
         this.beerStyleList = new ArrayList<BeerStyle>();
+        this.getStyles();
     }
     
      public ResultSet executeSQLquery(String sql) throws SQLException{
@@ -38,7 +39,7 @@ public class StyleDAO {
     
     
     public ArrayList<BeerStyle> getStyles() throws SQLException{
-        String sql = "select * from marca";
+        String sql = "select * from estilo";
         this.beerStyleList.clear();
         this.rs = this.executeSQLquery(sql);
         while(rs.next()){
@@ -69,7 +70,7 @@ public class StyleDAO {
     }
     
     public void updateStyle(int beerStyleCode,String newBeerStyleName) throws SQLException {
-        String sql = "UPDATE marca SET nm_marca = '" + newBeerStyleName + "' where cod_marca = " + beerStyleCode;
+        String sql = "UPDATE estilo SET nm_estilo = '" + newBeerStyleName + "' where cod_estilo = " + beerStyleCode;
         this.executeSQLDml(sql);
         this.getStyles();
         
