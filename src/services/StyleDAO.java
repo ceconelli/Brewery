@@ -26,7 +26,7 @@ public class StyleDAO {
         this.getStyles();
     }
     
-     public ResultSet executeSQLquery(String sql) throws SQLException{
+    public ResultSet executeSQLquery(String sql) throws SQLException{
         this.pst = this._dbConnection.prepareStatement(sql);
         this.rs = this.pst.executeQuery();
         return this.rs;

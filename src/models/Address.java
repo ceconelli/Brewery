@@ -49,6 +49,11 @@ public class Address {
     public void setClient(Client client) {
         this.client = client;
     }
+
+    @Override
+    public String toString() {
+        return "Address{" + "cep=" + cep + ", addressNumber=" + addressNumber + ", complement=" + complement + ", client=" + client + '}';
+    }
     
     
 }

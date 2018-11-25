@@ -16,6 +16,7 @@ import models.Client;
 import services.BeerDAO;
 import services.DBConnetion;
 import net.proteanit.sql.DbUtils;
+import services.AddressDAO;
 import services.BrandDAO;
 import services.ClientDAO;
 import services.StyleDAO;
@@ -30,8 +31,9 @@ public class MainFrame extends javax.swing.JFrame {
     BrandDAO brandDAO;
     StyleDAO styleDAO;
     ClientDAO clientDAO;
+    AddressDAO addressDAO;
     
-    public MainFrame(Connection con,BeerDAO beerDAO,BrandDAO brandDAO,StyleDAO styleDAO,ClientDAO clientDAO) throws SQLException {
+    public MainFrame(Connection con,BeerDAO beerDAO,BrandDAO brandDAO,StyleDAO styleDAO,ClientDAO clientDAO,AddressDAO addressDAO) throws SQLException {
         initComponents();
         this.setLocation(400, 200);
         this.dbConnection = con;
@@ -39,6 +41,7 @@ public class MainFrame extends javax.swing.JFrame {
         this.brandDAO = brandDAO;
         this.styleDAO = styleDAO;
         this.clientDAO = clientDAO;
+        this.addressDAO = addressDAO;
         
         this.FillBrandTable(this.brandDAO.getBrandList(),this.brands_table);
         this.FillStyleTable(this.styleDAO.getBeerStyleList());
@@ -309,6 +312,11 @@ public class MainFrame extends javax.swing.JFrame {
                 "cpf", "nome", "telefone", "email"
             }
         ));
+        clients_table.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                clients_tableMouseReleased(evt);
+            }
+        });
         jScrollPane3.setViewportView(clients_table);
 
         addClient_btn.setText("Add");
@@ -535,6 +543,15 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_removeClient_btnMouseReleased
 
+    private void clients_tableMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clients_tableMouseReleased
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) this.clients_table.getModel();
+        String cpf = (String) model.getValueAt(this.clients_table.getSelectedRow(),0);
+//        System.out.println(cpf);
+        System.out.println(this.addressDAO.getAddress(cpf));
+//        System.out.println(this.addressDAO.getAddress(cpf));
+    }//GEN-LAST:event_clients_tableMouseReleased
+
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -566,7 +583,8 @@ public class MainFrame extends javax.swing.JFrame {
                 try {
                     
                     Connection dbCon = DBConnetion.connect();
-                    new MainFrame(dbCon,new BeerDAO(dbCon), new BrandDAO(dbCon),new StyleDAO(dbCon), new ClientDAO(dbCon)).setVisible(true);
+                    ClientDAO clientDAO = new ClientDAO(dbCon);
+                    new MainFrame(dbCon,new BeerDAO(dbCon), new BrandDAO(dbCon),new StyleDAO(dbCon),clientDAO,new AddressDAO(dbCon,clientDAO)).setVisible(true);
                     
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);

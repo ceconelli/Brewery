@@ -44,14 +44,20 @@ public class ClientDAO {
         while(rs.next()){
             this.clientList.add(new Client(this.rs.getString("cpf"),this.rs.getString("nome"),this.rs.getString("telefone"),this.rs.getString("email")));
         }
-//        Collections.sort(this.clientList,new Comparator<Client>(){
-//            public int compare(Client c1, Client c2){
-//                return  c1.
-//            }
-//        });
+
         return this.clientList;
     }
-    
+
+    public Client getClient(String cpf){
+        for(Client c:this.clientList){
+//            System.out.println("cpf: "+c.getCpf());
+            if(c.getCpf().equals(cpf)){
+//                System.out.println("dsfdafsdfasdfasdf: "+c.toString());
+                return c;
+            }
+        }
+        return null;
+    }
     
     public int removeClient(String clientCpf) throws SQLException{
         String sql = "delete from cliente where cpf = '" + clientCpf + "'";
