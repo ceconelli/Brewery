@@ -48,6 +48,7 @@ public class MainFrame extends javax.swing.JFrame {
         this.FillBrandTable(this.brandDAO.getBrandList(),this.brands_table);
         this.FillStyleTable(this.styleDAO.getBeerStyleList());
         this.FillClientTable(this.clientDAO.getClientList());
+        this.FillBeerTable(this.beerDAO.getBeerList());
 //        this.brands_table.
 
         this.selectedClient = null;
@@ -73,6 +74,17 @@ public class MainFrame extends javax.swing.JFrame {
         for(BeerStyle style:styleList){
             System.out.println(style.toString());
             Object[] row = {style.getBeerStyleCode(),style.getBeerStyleName()};
+            tableModel.addRow(row);
+        }
+    }
+    
+    public void FillBeerTable(ArrayList<Beer> beerList) {
+        this.beers_table.setModel(new DefaultTableModel());
+        String col[] = {"cod_cerveja","nm_marca","nm_estilo","graduacao","preco","quantidade"};
+        DefaultTableModel tableModel = new DefaultTableModel(col, 0);
+        this.beers_table.setModel(tableModel);
+        for(Beer beer:beerList){
+            Object[] row = {beer.getCod_beer(),beer.getBrand().getBrandName(),beer.getStyle().getBeerStyleName(),beer.getAlcohol_content(),beer.getPrice(),0};
             tableModel.addRow(row);
         }
     }
@@ -135,6 +147,8 @@ public class MainFrame extends javax.swing.JFrame {
         removeAddress_btn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        beers_table = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -311,7 +325,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(editStyle_btn)
                     .addComponent(editStyleName_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(editStyleCode_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(175, Short.MAX_VALUE))
+                .addContainerGap(250, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Styles", jPanel3);
@@ -466,15 +480,38 @@ public class MainFrame extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Clients", jPanel2);
 
+        beers_table.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "cod_cerveja", "nm_marca", "nm_estilo", "graduacao", "preco", "quantidade"
+            }
+        ));
+        jScrollPane4.setViewportView(beers_table);
+        if (beers_table.getColumnModel().getColumnCount() > 0) {
+            beers_table.getColumnModel().getColumn(1).setResizable(false);
+            beers_table.getColumnModel().getColumn(3).setResizable(false);
+        }
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 561, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 541, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 407, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(352, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Beers", jPanel5);
@@ -487,7 +524,7 @@ public class MainFrame extends javax.swing.JFrame {
         );
         jInternalFrame2Layout.setVerticalGroup(
             jInternalFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 435, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -732,7 +769,9 @@ public class MainFrame extends javax.swing.JFrame {
                     
                     Connection dbCon = DBConnetion.connect();
                     ClientDAO clientDAO = new ClientDAO(dbCon);
-                    new MainFrame(dbCon,new BeerDAO(dbCon), new BrandDAO(dbCon),new StyleDAO(dbCon),clientDAO,new AddressDAO(dbCon,clientDAO)).setVisible(true);
+                    BrandDAO brandDAO = new BrandDAO(dbCon);
+                    StyleDAO styleDAO = new StyleDAO(dbCon);
+                    new MainFrame(dbCon,new BeerDAO(dbCon,brandDAO,styleDAO), brandDAO,styleDAO,clientDAO,new AddressDAO(dbCon,clientDAO)).setVisible(true);
                     
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -753,6 +792,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton addClient_btn;
     private javax.swing.JButton addEditAddress_btn;
     private javax.swing.JButton addStyle_btn;
+    private javax.swing.JTable beers_table;
     private javax.swing.JTextField brandCode_txtField;
     private javax.swing.JTextField brandName_txtField;
     private javax.swing.JTable brands_table;
@@ -778,6 +818,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField numberAddress_txtField;
     private javax.swing.JButton removeAddress_btn;
