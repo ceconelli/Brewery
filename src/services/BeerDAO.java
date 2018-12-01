@@ -49,6 +49,15 @@ public class BeerDAO {
         return beerList;
     }
 
+    public Beer getBeerByCode(int beerCode){
+        for(Beer beer:this.beerList){
+            if (beer.getCod_beer() == beerCode) {
+                return beer;
+            }
+        }
+        return null;
+    }
+    
     public Connection getDbConnection() {
         return _dbConnection;
     }
