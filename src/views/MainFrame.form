@@ -49,7 +49,7 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="jTabbedPane1" alignment="0" pref="419" max="32767" attributes="0"/>
+              <Component id="jTabbedPane1" alignment="0" pref="435" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
@@ -259,7 +259,7 @@
                               <Component id="editStyleName_txtField" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="editStyleCode_txtField" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="159" max="32767" attributes="0"/>
+                          <EmptySpace pref="175" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -500,7 +500,11 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="complement_txtField" min="-2" pref="146" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="addEditAddress_btn" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="addEditAddress_btn" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="removeAddress_btn" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
@@ -522,7 +526,10 @@
                                   <Component id="complement_txtField" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace pref="15" max="32767" attributes="0"/>
-                              <Component id="addEditAddress_btn" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="addEditAddress_btn" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="removeAddress_btn" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -558,6 +565,14 @@
                         <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="addEditAddress_btnMouseReleased"/>
                       </Events>
                     </Component>
+                    <Component class="javax.swing.JButton" name="removeAddress_btn">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Remove Address"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="removeAddress_btnMouseReleased"/>
+                      </Events>
+                    </Component>
                   </SubComponents>
                 </Container>
                 <Component class="javax.swing.JLabel" name="jLabel1">
@@ -566,6 +581,28 @@
                   </Properties>
                 </Component>
               </SubComponents>
+            </Container>
+            <Container class="javax.swing.JPanel" name="jPanel5">
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+                  <JTabbedPaneConstraints tabName="Beers">
+                    <Property name="tabTitle" type="java.lang.String" value="Beers"/>
+                  </JTabbedPaneConstraints>
+                </Constraint>
+              </Constraints>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <EmptySpace min="0" pref="561" max="32767" attributes="0"/>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <EmptySpace min="0" pref="407" max="32767" attributes="0"/>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
             </Container>
           </SubComponents>
         </Container>

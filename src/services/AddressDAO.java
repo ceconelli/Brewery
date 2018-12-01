@@ -77,6 +77,13 @@ public class AddressDAO {
         this.getAddresses();
     }
     
+    public int removeAddress(Client client) throws SQLException {
+        String sql = "DELETE FROM endereco WHERE cod_cliente = '" + client.getCpf() + "'";
+        int dmlResult = this.executeSQLDml(sql);
+        this.getAddresses();
+        return dmlResult;
+    }
+    
     public Address getAddress(String cpf){
         for(Address a:this.addressList){
 //            System.out.println(a.toString());

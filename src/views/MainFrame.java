@@ -132,7 +132,9 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         complement_txtField = new javax.swing.JTextField();
         addEditAddress_btn = new javax.swing.JButton();
+        removeAddress_btn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -309,7 +311,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(editStyle_btn)
                     .addComponent(editStyleName_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(editStyleCode_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(159, Short.MAX_VALUE))
+                .addContainerGap(175, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Styles", jPanel3);
@@ -361,6 +363,13 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        removeAddress_btn.setText("Remove Address");
+        removeAddress_btn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                removeAddress_btnMouseReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -380,7 +389,10 @@ public class MainFrame extends javax.swing.JFrame {
                         .addComponent(numberAddress_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(complement_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(addEditAddress_btn))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(addEditAddress_btn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(removeAddress_btn)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -397,7 +409,9 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(numberAddress_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(complement_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
-                .addComponent(addEditAddress_btn)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addEditAddress_btn)
+                    .addComponent(removeAddress_btn))
                 .addContainerGap())
         );
 
@@ -452,6 +466,19 @@ public class MainFrame extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Clients", jPanel2);
 
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 561, Short.MAX_VALUE)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 407, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Beers", jPanel5);
+
         javax.swing.GroupLayout jInternalFrame2Layout = new javax.swing.GroupLayout(jInternalFrame2.getContentPane());
         jInternalFrame2.getContentPane().setLayout(jInternalFrame2Layout);
         jInternalFrame2Layout.setHorizontalGroup(
@@ -460,7 +487,7 @@ public class MainFrame extends javax.swing.JFrame {
         );
         jInternalFrame2Layout.setVerticalGroup(
             jInternalFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 419, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 435, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -605,11 +632,8 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_addClient_btnMouseReleased
 
     private void removeClient_btnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removeClient_btnMouseReleased
-        // TODO add your handling code here:
         if(this.clients_table.getSelectedRow() != -1){
             DefaultTableModel model = (DefaultTableModel) this.clients_table.getModel();
-    //        model.removeRow(this.brands_table.getSelectedRow());
-//            System.out.println((int)model.getValueAt(this.clients_table.getSelectedRow(),0));
             try {
                 System.out.println(this.clientDAO.removeClient((String) model.getValueAt(this.clients_table.getSelectedRow(),0)));
                 this.FillClientTable(this.clientDAO.getClientList());
@@ -662,6 +686,19 @@ public class MainFrame extends javax.swing.JFrame {
          
         
     }//GEN-LAST:event_addEditAddress_btnMouseReleased
+
+    private void removeAddress_btnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removeAddress_btnMouseReleased
+        // TODO add your handling code here:
+        if (this.addressDAO.getAddress(this.selectedClient.getCpf()) != null) {
+            try {
+                this.addressDAO.removeAddress(this.selectedClient);
+            } catch (SQLException ex) {
+                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
+        }
+        
+    }//GEN-LAST:event_removeAddress_btnMouseReleased
 
     
     public static void main(String args[]) {
@@ -737,11 +774,13 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField numberAddress_txtField;
+    private javax.swing.JButton removeAddress_btn;
     private javax.swing.JButton removeClient_btn;
     private javax.swing.JButton removeStyle_btn;
     private javax.swing.JButton remove_btn;
