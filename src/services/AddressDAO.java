@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import models.Address;
 import models.Client;
 
@@ -34,7 +36,11 @@ public class AddressDAO {
     }
     
     public int executeSQLDml(String sql) throws SQLException{
-        this.pst = this._dbConnection.prepareStatement(sql);
+        try {
+            this.pst = this._dbConnection.prepareStatement(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(AddressDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return this.pst.executeUpdate();
     }
     
@@ -50,6 +56,25 @@ public class AddressDAO {
             
         }
         return this.addressList;
+    }
+    
+    public boolean addAddress(String cep,String number,String complement,Client client) throws SQLException {
+        String sql = "INSERT INTO endereco(cod_cliente,cep,numero,complemento) values ('" + client.getCpf() + "','" + cep + "','" + number + "','" + complement + "')";
+        try {
+            this.executeSQLDml(sql);
+            this.getAddresses();
+        } catch (SQLException ex) {
+            Logger.getLogger(AddressDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return this.rs.rowInserted();
+    }
+    
+    public void updateAddress(String cep,String number,String complement,Client client) throws SQLException {
+        Address oldAddress = this.getAddress(client.getCpf());
+        String sql = "UPDATE endereco SET cep = '" + cep + "',numero = '" + number + "',complemento = '" + complement + "' WHERE cod_cliente = '" + client.getCpf() + "'";
+        this.executeSQLDml(sql);
+        this.getAddresses();
     }
     
     public Address getAddress(String cpf){
