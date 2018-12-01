@@ -17,7 +17,8 @@ public class DBConnetion {
      public static Connection connect() throws ClassNotFoundException{
         try{
             Class.forName("org.postgresql.Driver");
-            Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/cervejaria","postgres", "pretocriolao"); 
+            Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/cervejaria","postgres", "postgres"); 
+            System.out.println(con);
             return con;
             
         }catch(SQLException error){
