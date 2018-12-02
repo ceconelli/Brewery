@@ -38,7 +38,7 @@ public class OrderDAO {
                                          this.rs.getDouble("quantidade"),
                                          this.rs.getDouble("valor_pedido"),
                                          this.rs.getDate("data_pedido"),
-                                         this.rs.getBoolean("entregue")
+                                         this.rs.getBoolean("entrega")
                                         ));
         }
     }
