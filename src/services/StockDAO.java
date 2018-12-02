@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import models.Stock;
 import utils.Utils;
 /**
@@ -34,6 +36,11 @@ public class StockDAO {
             this.stockList.add(new Stock(this.beerDAO.getBeerByCode(this.rs.getInt("cod_cerveja")),this.rs.getDouble("quantidade")));
         }
         System.out.println(this.stockList.toString());
+        Collections.sort(this.stockList,new Comparator<Stock>(){
+            public int compare(Stock s1, Stock s2){
+                return s1.getBeer().getCod_beer() - s2.getBeer().getCod_beer();
+            }
+        });
         return this.stockList;        
     }
 
