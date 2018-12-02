@@ -689,8 +689,19 @@ public class MainFrame extends javax.swing.JFrame {
             this.FillStyleTable(this.styleDAO.getBeerStyleList());
             this.FillStyleComboBox(this.styleDAO.getBeerStyleList());
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(rootPane, ex);
-            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+            boolean optionPane = true;
+            for(BeerStyle style : this.styleDAO.getBeerStyleList()){
+                System.out.println(style.getBeerStyleName() + " - " + styleName);
+                if(style.getBeerStyleName().equals(styleName)){
+                    JOptionPane.showMessageDialog(rootPane, "Já existe um estilo com o mesmo nome. Por favor, insira um nome inexistente");
+                    Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, "Já existe um estilo com o mesmo nome. Por favor, insira um nome inexistente");
+                    optionPane = false;
+                }
+            }
+            if(optionPane){
+                JOptionPane.showMessageDialog(rootPane, "Um erro ocorreu. Tente novamente");
+                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_addStyle_btnMouseReleased
 
