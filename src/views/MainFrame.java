@@ -218,7 +218,7 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(224, Short.MAX_VALUE)
+                .addContainerGap(11, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 562, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -234,7 +234,6 @@ public class MainFrame extends javax.swing.JFrame {
                         .addGap(31, 31, 31)
                         .addComponent(addBrand_btn)
                         .addGap(168, 168, 168))))
-            .addComponent(jScrollPane1)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(268, 268, 268)
                 .addComponent(jLabel5)
@@ -250,7 +249,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(brandName_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 120, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 172, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(remove_btn)
                     .addComponent(edit_btn)
@@ -308,8 +307,7 @@ public class MainFrame extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 552, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -329,7 +327,7 @@ public class MainFrame extends javax.swing.JFrame {
                                 .addGap(31, 31, 31)
                                 .addComponent(addStyle_btn)
                                 .addGap(159, 159, 159))))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 552, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 553, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -341,14 +339,14 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(addStyle_btn)
                     .addComponent(styleName_txtField))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(removeStyle_btn)
                     .addComponent(editStyle_btn)
                     .addComponent(editStyleName_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(editStyleCode_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(330, Short.MAX_VALUE))
+                .addContainerGap(213, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Styles", jPanel3);
@@ -462,7 +460,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 552, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 553, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(addClientCpf_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -559,7 +557,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(addAlcoholContent_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(addPrice_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(addBeer_btn))
-                .addContainerGap(292, Short.MAX_VALUE))
+                .addContainerGap(344, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Beers", jPanel5);
@@ -572,7 +570,7 @@ public class MainFrame extends javax.swing.JFrame {
         );
         jInternalFrame2Layout.setVerticalGroup(
             jInternalFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 543, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -585,66 +583,11 @@ public class MainFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jInternalFrame2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 327, Short.MAX_VALUE))
+                .addGap(0, 315, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void remove_btnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_remove_btnMouseReleased
-
-        if(this.brands_table.getSelectedRow() != -1){
-            DefaultTableModel model = (DefaultTableModel) this.brands_table.getModel();
-    //        model.removeRow(this.brands_table.getSelectedRow());
-            System.out.println((int)model.getValueAt(this.brands_table.getSelectedRow(),0));
-            try {
-                System.out.println(this.brandDAO.removeBrand((int)model.getValueAt(this.brands_table.getSelectedRow(),0)));
-                this.FillBrandTable(this.brandDAO.getBrandList(),this.brands_table);
-            } catch (SQLException ex) {
-                System.out.println("sdf: "+ex.getMessage());
-                JOptionPane.showMessageDialog(rootPane, ex);
-                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-      
-        
-    }//GEN-LAST:event_remove_btnMouseReleased
-
-    private void addBrand_btnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addBrand_btnMouseReleased
-
-        String brandName = this.brandName_txtField.getText();
-        try {
-            this.brandDAO.addBrand(0, brandName);  //O BD insere o codigo correto
-            this.FillBrandTable(this.brandDAO.getBrandList(), this.brands_table);
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(rootPane, ex);
-            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_addBrand_btnMouseReleased
-
-    private void brands_tableMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_brands_tableMouseReleased
-        // TODO add your handling code here:
-        System.out.println("mouse released in table brands");
-        DefaultTableModel model = (DefaultTableModel) this.brands_table.getModel();
-        
-        this.editBrandCode_txtField.setText(Integer.toString((int) model.getValueAt(this.brands_table.getSelectedRow(),0)));
-        this.editBrandCode_txtField.setEditable(false);
-        this.editBrandName_txtField.setText((String)model.getValueAt(this.brands_table.getSelectedRow(),1));
-        
-    }//GEN-LAST:event_brands_tableMouseReleased
-
-    private void edit_btnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_edit_btnMouseReleased
-        // TODO add your handling code here:
-        if(this.brands_table.getSelectedRow() != -1){
-            DefaultTableModel model = (DefaultTableModel) this.brands_table.getModel();
-            try {
-                this.brandDAO.updateBrand((int)model.getValueAt(this.brands_table.getSelectedRow(),0),this.editBrandName_txtField.getText());
-                this.FillBrandTable(this.brandDAO.getBrandList(),this.brands_table);
-            } catch (SQLException ex) {
-                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }//GEN-LAST:event_edit_btnMouseReleased
 
     private void addStyle_btnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addStyle_btnMouseReleased
 
@@ -781,6 +724,60 @@ public class MainFrame extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_removeAddress_btnMouseReleased
+
+    private void edit_btnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_edit_btnMouseReleased
+        // TODO add your handling code here:
+        if(this.brands_table.getSelectedRow() != -1){
+            DefaultTableModel model = (DefaultTableModel) this.brands_table.getModel();
+            try {
+                this.brandDAO.updateBrand((int)model.getValueAt(this.brands_table.getSelectedRow(),0),this.editBrandName_txtField.getText());
+                this.FillBrandTable(this.brandDAO.getBrandList(),this.brands_table);
+            } catch (SQLException ex) {
+                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_edit_btnMouseReleased
+
+    private void addBrand_btnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addBrand_btnMouseReleased
+
+        String brandName = this.brandName_txtField.getText();
+        try {
+            this.brandDAO.addBrand(0, brandName);  //O BD insere o codigo correto
+            this.FillBrandTable(this.brandDAO.getBrandList(), this.brands_table);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(rootPane, ex);
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_addBrand_btnMouseReleased
+
+    private void remove_btnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_remove_btnMouseReleased
+
+        if(this.brands_table.getSelectedRow() != -1){
+            DefaultTableModel model = (DefaultTableModel) this.brands_table.getModel();
+            //        model.removeRow(this.brands_table.getSelectedRow());
+            System.out.println((int)model.getValueAt(this.brands_table.getSelectedRow(),0));
+            try {
+                System.out.println(this.brandDAO.removeBrand((int)model.getValueAt(this.brands_table.getSelectedRow(),0)));
+                this.FillBrandTable(this.brandDAO.getBrandList(),this.brands_table);
+            } catch (SQLException ex) {
+                System.out.println("sdf: "+ex.getMessage());
+                JOptionPane.showMessageDialog(rootPane, ex);
+                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+    }//GEN-LAST:event_remove_btnMouseReleased
+
+    private void brands_tableMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_brands_tableMouseReleased
+        // TODO add your handling code here:
+        System.out.println("mouse released in table brands");
+        DefaultTableModel model = (DefaultTableModel) this.brands_table.getModel();
+
+        this.editBrandCode_txtField.setText(Integer.toString((int) model.getValueAt(this.brands_table.getSelectedRow(),0)));
+        this.editBrandCode_txtField.setEditable(false);
+        this.editBrandName_txtField.setText((String)model.getValueAt(this.brands_table.getSelectedRow(),1));
+
+    }//GEN-LAST:event_brands_tableMouseReleased
 
     
     public static void main(String args[]) {
