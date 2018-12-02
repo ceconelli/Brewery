@@ -53,13 +53,14 @@ public class BeerDAO {
     }
     
     public int addBeer(int brandCode,int styleCode,double alcoholContent,double price) {
-        String sql = "INSERT INTO cerveja(cod_marca,cod_estilo,graduacao,preco)"
-                + " VALUES (" + brandCode + "," + styleCode + "," + alcoholContent + "," + price + ")";
+        String sql = "INSERT INTO cerveja(cod_cerveja,cod_marca,cod_estilo,graduacao,preco)"
+                + " VALUES (0," + brandCode + "," + styleCode + "," + alcoholContent + "," + price + ")";
         
         try {
             int i = Utils.executeSQLDml(this._dbConnection, sql);
             this.getBeers();
             return i;
+            
         } catch (SQLException ex) {
             Logger.getLogger(BeerDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
