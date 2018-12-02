@@ -28,7 +28,7 @@ public class OrdersFrame extends javax.swing.JFrame {
         initComponents();
         this.orderList = orderList;
         this.rootFrame = rootFrame;
-//        this.rootFrame.set
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setLocation(this.rootFrame.getLocation());
         this.FillClientOrdersTable();
     }
