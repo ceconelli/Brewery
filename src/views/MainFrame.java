@@ -58,6 +58,8 @@ public class MainFrame extends javax.swing.JFrame {
         this.FillStyleComboBox(this.styleDAO.getBeerStyleList());
 
         this.selectedClient = null;
+//        this.beers_table.set
+                
     }
     
     public void FillBrandComboBox(ArrayList<Brand> brandList){
@@ -105,6 +107,7 @@ public class MainFrame extends javax.swing.JFrame {
         this.beers_table.setModel(new DefaultTableModel());
         String col[] = {"cod_cerveja","nm_marca","nm_estilo","graduacao","preco","quantidade"};
         DefaultTableModel tableModel = new DefaultTableModel(col, 0);
+        this.beers_table.setDefaultEditor(Object.class, null);
         this.beers_table.setModel(tableModel);
         for(Stock stock:stockList){
             Object[] row = {stock.getBeer().getCod_beer(),stock.getBeer().getBrand().getBrandName(),stock.getBeer().getStyle().getBeerStyleName(),stock.getBeer().getAlcohol_content(),stock.getBeer().getPrice(),stock.getAmount()};
@@ -177,6 +180,7 @@ public class MainFrame extends javax.swing.JFrame {
         addAlcoholContent_txtField = new javax.swing.JTextField();
         addPrice_txtField = new javax.swing.JTextField();
         addBeer_btn = new javax.swing.JButton();
+        removeBeer_btn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -261,7 +265,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(brandName_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 200, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 208, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(remove_btn)
                     .addComponent(edit_btn)
@@ -356,7 +360,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(editStyle_btn)
                     .addComponent(editStyleName_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(editStyleCode_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(241, Short.MAX_VALUE))
+                .addContainerGap(249, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Styles", jPanel3);
@@ -539,6 +543,13 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        removeBeer_btn.setText("Remove Beer");
+        removeBeer_btn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                removeBeer_btnMouseReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -548,16 +559,19 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane4)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(addBrand_cb, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(addStyle_cb, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(addAlcoholContent_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(addPrice_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(addBeer_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(addBrand_cb, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(addStyle_cb, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(addAlcoholContent_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(addPrice_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(addBeer_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(removeBeer_btn))
+                        .addGap(0, 1, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -572,7 +586,9 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(addAlcoholContent_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(addPrice_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(addBeer_btn))
-                .addContainerGap(372, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(removeBeer_btn)
+                .addContainerGap(339, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Beers", jPanel5);
@@ -585,7 +601,7 @@ public class MainFrame extends javax.swing.JFrame {
         );
         jInternalFrame2Layout.setVerticalGroup(
             jInternalFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 571, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 579, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -598,7 +614,7 @@ public class MainFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jInternalFrame2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 291, Short.MAX_VALUE))
+                .addGap(0, 283, Short.MAX_VALUE))
         );
 
         pack();
@@ -610,6 +626,7 @@ public class MainFrame extends javax.swing.JFrame {
         try {
             this.styleDAO.addStyle(0, styleName);  //O BD insere o codigo correto
             this.FillStyleTable(this.styleDAO.getBeerStyleList());
+            this.FillStyleComboBox(this.styleDAO.getBeerStyleList());
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(rootPane, ex);
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -623,6 +640,7 @@ public class MainFrame extends javax.swing.JFrame {
             try {
                 System.out.println(this.styleDAO.removeStyle((int)model.getValueAt(this.styles_table.getSelectedRow(),0)));
                 this.FillStyleTable(this.styleDAO.getBeerStyleList());
+                this.FillStyleComboBox(this.styleDAO.getBeerStyleList());
             } catch (SQLException ex) {
                 System.out.println("sdf: "+ex.getMessage());
                 JOptionPane.showMessageDialog(rootPane, ex);
@@ -759,6 +777,7 @@ public class MainFrame extends javax.swing.JFrame {
         try {
             this.brandDAO.addBrand(0, brandName);  //O BD insere o codigo correto
             this.FillBrandTable(this.brandDAO.getBrandList(), this.brands_table);
+            this.FillBrandComboBox(this.brandDAO.getBrandList());
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(rootPane, ex);
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -774,6 +793,7 @@ public class MainFrame extends javax.swing.JFrame {
             try {
                 System.out.println(this.brandDAO.removeBrand((int)model.getValueAt(this.brands_table.getSelectedRow(),0)));
                 this.FillBrandTable(this.brandDAO.getBrandList(),this.brands_table);
+                this.FillBrandComboBox(this.brandDAO.getBrandList());
             } catch (SQLException ex) {
                 System.out.println("sdf: "+ex.getMessage());
                 JOptionPane.showMessageDialog(rootPane, ex);
@@ -824,11 +844,20 @@ public class MainFrame extends javax.swing.JFrame {
 
             this.stockDAO.getStockItems();
             this.FillBeerTable(this.stockDAO.getStockList());
+            this.clearAddBeerFields();
+            JOptionPane.showMessageDialog(rootPane, "Beer added successfuly");
         } catch (SQLException ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }//GEN-LAST:event_addBeer_btnMouseReleased
+
+    private void removeBeer_btnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removeBeer_btnMouseReleased
+        // TODO add your handling code here:
+        if(this.beers_table.getSelectedRow() != -1) {
+            
+        }
+    }//GEN-LAST:event_removeBeer_btnMouseReleased
 
     
     public static void main(String args[]) {
@@ -923,6 +952,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField numberAddress_txtField;
     private javax.swing.JButton removeAddress_btn;
+    private javax.swing.JButton removeBeer_btn;
     private javax.swing.JButton removeClient_btn;
     private javax.swing.JButton removeStyle_btn;
     private javax.swing.JButton remove_btn;

@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import models.Beer;
@@ -49,18 +51,17 @@ public class BeerDAO {
             this.beerList.add(new Beer(this.rs.getInt("cod_cerveja"),this.rs.getDouble("graduacao"),this.rs.getDouble("preco"),this.brandDAO.getBrandByCode(this.rs.getInt("cod_marca")),this.styleDAO.getStyleByCode(this.rs.getInt("cod_estilo"))));
         }
         System.out.println(this.beerList.toString());
+        
         return beerList;
     }
     
     public int addBeer(int brandCode,int styleCode,double alcoholContent,double price) {
-        String sql = "INSERT INTO cerveja(cod_cerveja,cod_marca,cod_estilo,graduacao,preco)"
-                + " VALUES (0," + brandCode + "," + styleCode + "," + alcoholContent + "," + price + ")";
-        
+//        String sql = "SELECT addBeer(" + brandCode + "," + styleCode + "," + alcoholContent + "," + price + ")";
+        String sql = "INSERT INTO cerveja(cod_cerveja,cod_marca,cod_estilo,graduacao,preco) VALUES(0,"
+                + brandCode + "," + styleCode + "," + alcoholContent + "," + price + ")";
         try {
-            int i = Utils.executeSQLDml(this._dbConnection, sql);
+            Utils.executeSQLDml(this._dbConnection, sql);
             this.getBeers();
-            return i;
-            
         } catch (SQLException ex) {
             Logger.getLogger(BeerDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
