@@ -55,15 +55,25 @@ public class MainFrame extends javax.swing.JFrame {
         this.FillClientTable(this.clientDAO.getClientList());
         this.FillBeerTable(this.stockDAO.getStockList());
         this.FillBrandComboBox(this.brandDAO.getBrandList());
+        this.FillStyleComboBox(this.styleDAO.getBeerStyleList());
 
         this.selectedClient = null;
     }
     
     public void FillBrandComboBox(ArrayList<Brand> brandList){
-//        Object[] items = <seu array de objetos>;
-        DefaultComboBoxModel model = new DefaultComboBoxModel(brandList.toArray());
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        for(Brand brand:brandList){
+            model.addElement(brand.getBrandName());
+        }
         this.addBrand_cb.setModel(model);
-//        comboBox.setModel(model);
+    }
+    
+    public void FillStyleComboBox(ArrayList<BeerStyle> styleList){
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        for(BeerStyle style:styleList){
+            model.addElement(style.getBeerStyleName());
+        }
+        this.addStyle_cb.setModel(model);
     }
     
     
@@ -222,22 +232,24 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 562, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(editBrandCode_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(editBrandName_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(edit_btn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(remove_btn))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(brandName_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(31, 31, 31)
-                        .addComponent(addBrand_btn)
-                        .addGap(168, 168, 168))))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(268, 268, 268)
-                .addComponent(jLabel5)
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(editBrandCode_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(editBrandName_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(edit_btn)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(remove_btn))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(brandName_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(addBrand_btn)))
+                                .addContainerGap())))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -249,7 +261,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(brandName_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 172, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 200, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(remove_btn)
                     .addComponent(edit_btn)
@@ -319,14 +331,12 @@ public class MainFrame extends javax.swing.JFrame {
                                 .addComponent(editStyle_btn)
                                 .addGap(18, 18, 18)
                                 .addComponent(removeStyle_btn))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel6)
-                                .addGap(268, 268, 268))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(styleName_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(31, 31, 31)
-                                .addComponent(addStyle_btn)
-                                .addGap(159, 159, 159))))
+                                .addGroup(jPanel3Layout.createSequentialGroup()
+                                    .addComponent(styleName_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(addStyle_btn)))))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 553, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -346,7 +356,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(editStyle_btn)
                     .addComponent(editStyleName_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(editStyleCode_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(213, Short.MAX_VALUE))
+                .addContainerGap(241, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Styles", jPanel3);
@@ -523,6 +533,11 @@ public class MainFrame extends javax.swing.JFrame {
         addStyle_cb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         addBeer_btn.setText("Add Beer");
+        addBeer_btn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                addBeer_btnMouseReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -557,7 +572,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(addAlcoholContent_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(addPrice_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(addBeer_btn))
-                .addContainerGap(344, Short.MAX_VALUE))
+                .addContainerGap(372, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Beers", jPanel5);
@@ -570,7 +585,7 @@ public class MainFrame extends javax.swing.JFrame {
         );
         jInternalFrame2Layout.setVerticalGroup(
             jInternalFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 543, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 571, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -583,7 +598,7 @@ public class MainFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jInternalFrame2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 315, Short.MAX_VALUE))
+                .addGap(0, 291, Short.MAX_VALUE))
         );
 
         pack();
@@ -778,6 +793,42 @@ public class MainFrame extends javax.swing.JFrame {
         this.editBrandName_txtField.setText((String)model.getValueAt(this.brands_table.getSelectedRow(),1));
 
     }//GEN-LAST:event_brands_tableMouseReleased
+
+    private void clearAddBeerFields(){
+        this.addAlcoholContent_txtField.setText("");
+        this.addPrice_txtField.setText("");
+    }
+    
+    private void addBeer_btnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addBeer_btnMouseReleased
+        // TODO add your handling code here:
+        try {
+            Double alcoholContent = Double.parseDouble(this.addAlcoholContent_txtField.getText());
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(rootPane, "Invalid value for graduacao");
+            this.addAlcoholContent_txtField.setText("");
+            return;
+        }
+        
+        try {
+            Double price = Double.parseDouble(this.addPrice_txtField.getText());
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(rootPane, "Invalid value for preco");
+            this.addPrice_txtField.setText("");
+            return;
+        }
+        try {
+            this.beerDAO.addBeer(this.brandDAO.getBrandByName((String)this.addBrand_cb.getSelectedItem()).getBrandCode(),
+                    this.styleDAO.getStyleByName((String)this.addStyle_cb.getSelectedItem()).getBeerStyleCode(),
+                    Double.parseDouble(this.addAlcoholContent_txtField.getText()), 
+                    Double.parseDouble(this.addPrice_txtField.getText()));
+
+            this.stockDAO.getStockItems();
+            this.FillBeerTable(this.stockDAO.getStockList());
+        } catch (SQLException ex) {
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_addBeer_btnMouseReleased
 
     
     public static void main(String args[]) {

@@ -85,6 +85,15 @@ public class StyleDAO {
         return null;
     }
 
+    public BeerStyle getStyleByName(String beerStyleName){
+        for(BeerStyle bs:this.beerStyleList){
+            if (bs.getBeerStyleName() == beerStyleName) {
+                return bs;
+            }
+        }
+        return null;
+    }
+    
     public Connection getDbConnection() {
         return _dbConnection;
     }

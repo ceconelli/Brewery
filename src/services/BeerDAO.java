@@ -5,8 +5,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import models.Beer;
 import models.BeerStyle;
+import utils.Utils;
 
 
 public class BeerDAO {
@@ -47,6 +50,20 @@ public class BeerDAO {
         }
         System.out.println(this.beerList.toString());
         return beerList;
+    }
+    
+    public int addBeer(int brandCode,int styleCode,double alcoholContent,double price) {
+        String sql = "INSERT INTO cerveja(cod_marca,cod_estilo,graduacao,preco)"
+                + " VALUES (" + brandCode + "," + styleCode + "," + alcoholContent + "," + price + ")";
+        
+        try {
+            int i = Utils.executeSQLDml(this._dbConnection, sql);
+            this.getBeers();
+            return i;
+        } catch (SQLException ex) {
+            Logger.getLogger(BeerDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
     }
 
     public Beer getBeerByCode(int beerCode){

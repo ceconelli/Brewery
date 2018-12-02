@@ -85,6 +85,15 @@ public class BrandDAO {
         return null;
     }
     
+    public Brand getBrandByName(String brandName) {
+        for(Brand b:this.brandList){
+            if (b.getBrandName() == brandName) {
+                return b;
+            }
+        }
+        return null;
+    }
+    
     public Connection getDbConnection() {
         return _dbConnection;
     }
