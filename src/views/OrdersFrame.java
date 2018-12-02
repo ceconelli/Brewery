@@ -28,6 +28,7 @@ public class OrdersFrame extends javax.swing.JFrame {
         initComponents();
         this.orderList = orderList;
         this.rootFrame = rootFrame;
+        this.rootFrame.setEnabled(false);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setLocation(this.rootFrame.getLocation());
         this.clientOrders_table.setDefaultEditor(Object.class, null);
@@ -106,7 +107,7 @@ public class OrdersFrame extends javax.swing.JFrame {
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
-//        this.rootFrame.setEnabled(true);
+        this.rootFrame.setEnabled(true);
         
     }//GEN-LAST:event_formWindowClosing
 
