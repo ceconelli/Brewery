@@ -60,6 +60,11 @@ public class MainFrame extends javax.swing.JFrame {
         this.FillBeerTable(this.stockDAO.getStockList());
         this.FillBrandComboBox(this.brandDAO.getBrandList());
         this.FillStyleComboBox(this.styleDAO.getBeerStyleList());
+        
+        this.brands_table.setDefaultEditor(Object.class, null);
+        this.beers_table.setDefaultEditor(Object.class, null);
+        this.styles_table.setDefaultEditor(Object.class, null);
+        this.clients_table.setDefaultEditor(Object.class, null);
 
         this.selectedClient = null;
 //        this.beers_table.set
@@ -111,7 +116,6 @@ public class MainFrame extends javax.swing.JFrame {
         this.beers_table.setModel(new DefaultTableModel());
         String col[] = {"cod_cerveja","nm_marca","nm_estilo","graduacao","preco","quantidade"};
         DefaultTableModel tableModel = new DefaultTableModel(col, 0);
-        this.beers_table.setDefaultEditor(Object.class, null);
         this.beers_table.setModel(tableModel);
         for(Stock stock:stockList){
             Object[] row = {stock.getBeer().getCod_beer(),stock.getBeer().getBrand().getBrandName(),stock.getBeer().getStyle().getBeerStyleName(),stock.getBeer().getAlcohol_content(),stock.getBeer().getPrice(),stock.getAmount()};

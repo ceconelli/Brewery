@@ -30,6 +30,7 @@ public class OrdersFrame extends javax.swing.JFrame {
         this.rootFrame = rootFrame;
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setLocation(this.rootFrame.getLocation());
+        this.clientOrders_table.setDefaultEditor(Object.class, null);
         this.FillClientOrdersTable();
     }
 
