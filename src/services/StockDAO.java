@@ -44,6 +44,21 @@ public class StockDAO {
         return this.stockList;        
     }
 
+    public Double getAmount(int beerCode) throws SQLException {
+        String sql = "SELECT * FROM estoque WHERE cod_cerveja = " + beerCode + "";
+        this.rs = Utils.executeSQLquery(this._dbConnection, sql);
+        Double amount = null;
+        while(this.rs.next())
+            amount = this.rs.getDouble("quantidade");
+        return amount;
+    }
+    
+    public void updateBeerAmount(int beerCode,double newAmount) throws SQLException {
+        String sql = "UPDATE estoque SET quantidade = " + newAmount + " where cod_cerveja = " + beerCode;
+        Utils.executeSQLDml(this._dbConnection, sql);
+        this.getStockItems();
+    }
+    
     public Connection getDbConnection() {
         return _dbConnection;
     }

@@ -1,3 +1,7 @@
+create domain status as varchar
+	default 'AGUARDANDO'
+	check (value in ('ENVIADO','CANCELADO','AGUARDANDO'));
+
 create table estilo(
 	cod_estilo integer primary key not null,
 	nm_estilo varchar not null
@@ -57,6 +61,28 @@ create table pedido (
 		references cerveja(cod_cerveja)
 		on update restrict on delete restrict
 );
+
+alter table pedido
+	add column entrega status;
+
+alter table pedido
+	add column cod_pedido int primary key;
+
+create or replace function addPedido(varchar,integer,float,float)
+	returns void as $$
+	declare
+		lastIndex integer;
+	begin
+		select into lastIndex max(cod_pedido) from pedido;
+		if lastIndex is null then
+			lastIndex = 0;
+		end if;
+		lastIndex = lastIndex + 1;
+		raise notice '%',lastIndex;
+		insert into pedido(cod_cliente,cod_cerveja,quantidade,valor_pedido,cod_pedido)
+			values ($1,$2,$3,$4,lastIndex);
+	end;
+	$$ language 'plpgsql'
 
 create table endereco (
 	cod_cliente varchar primary key not null,

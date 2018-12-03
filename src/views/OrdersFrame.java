@@ -5,8 +5,12 @@
  */
 package views;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import models.Brand;
@@ -21,10 +25,10 @@ public class OrdersFrame extends javax.swing.JFrame {
     /**
      * Creates new form OrdersFrame
      */
-    JFrame rootFrame;
+    MainFrame rootFrame;
     ArrayList<Order> orderList;
     
-    public OrdersFrame(ArrayList<Order> orderList,JFrame rootFrame) {
+    public OrdersFrame(ArrayList<Order> orderList,MainFrame rootFrame) throws SQLException {
         initComponents();
         this.orderList = orderList;
         this.rootFrame = rootFrame;
@@ -32,17 +36,16 @@ public class OrdersFrame extends javax.swing.JFrame {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setLocation(this.rootFrame.getLocation());
         this.clientOrders_table.setDefaultEditor(Object.class, null);
-        this.FillClientOrdersTable();
+        this.FillClientOrdersTable(this.rootFrame.orderDAO.gerOrders());
     }
 
-    public void FillClientOrdersTable(){
+    public void FillClientOrdersTable(ArrayList<Order> clientOrders){
         this.clientOrders_table.setModel(new DefaultTableModel());
-        String col[] = {"cod_cerveja","quantidade","valor_pedido","data_pedido","entrega"};
+        String col[] = {"cod_cerveja","quantidade","valor_pedido","data_pedido","entrega","cod_pedido"};
         DefaultTableModel tableModel = new DefaultTableModel(col, 0);
         this.clientOrders_table.setModel(tableModel);
-        for(Order order:orderList){
-//            System.out.println(brand.toString());
-            Object[] row = {order.getBeer().getCod_beer(),order.getAmount(),order.getPrice(),order.getDate(),order.isDelivered()};
+        for(Order order:clientOrders){
+            Object[] row = {order.getBeer().getCod_beer(),order.getAmount(),order.getPrice(),order.getDate(),order.isDelivered(),order.getOrderCode()};
             tableModel.addRow(row);
         }
     }
@@ -59,6 +62,8 @@ public class OrdersFrame extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         clientOrders_table = new javax.swing.JTable();
+        setDelivered_btn = new javax.swing.JButton();
+        calcerOrder = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -80,15 +85,39 @@ public class OrdersFrame extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(clientOrders_table);
 
+        setDelivered_btn.setText("Set Delivered");
+        setDelivered_btn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                setDelivered_btnMouseReleased(evt);
+            }
+        });
+
+        calcerOrder.setText("Cancel Order");
+        calcerOrder.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                calcerOrderMouseReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(calcerOrder)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(setDelivered_btn))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(setDelivered_btn)
+                    .addComponent(calcerOrder))
+                .addGap(0, 84, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -110,6 +139,40 @@ public class OrdersFrame extends javax.swing.JFrame {
         this.rootFrame.setEnabled(true);
         
     }//GEN-LAST:event_formWindowClosing
+
+    private void setDelivered_btnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_setDelivered_btnMouseReleased
+        // TODO add your handling code here:
+        if(this.clientOrders_table.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(rootPane, "Select an order");
+            return;
+        }
+        DefaultTableModel model = (DefaultTableModel) this.clientOrders_table.getModel();
+        System.out.println(model.getValueAt(this.clientOrders_table.getSelectedRow(),5));
+        this.rootFrame.orderDAO.updateOrder((int) model.getValueAt(this.clientOrders_table.getSelectedRow(),5),"ENVIADO");
+        try {
+            this.FillClientOrdersTable(this.rootFrame.orderDAO.gerOrders());
+            this.rootFrame.FillAllOrdersTable(this.rootFrame.orderDAO.gerOrders());
+        } catch (SQLException ex) {
+            Logger.getLogger(OrdersFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_setDelivered_btnMouseReleased
+
+    private void calcerOrderMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_calcerOrderMouseReleased
+        // TODO add your handling code here:
+        if(this.clientOrders_table.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(rootPane, "Select an order");
+            return;
+        }
+        DefaultTableModel model = (DefaultTableModel) this.clientOrders_table.getModel();
+        System.out.println(model.getValueAt(this.clientOrders_table.getSelectedRow(),5));
+        this.rootFrame.orderDAO.updateOrder((int) model.getValueAt(this.clientOrders_table.getSelectedRow(),5),"CANCELADO");
+        try {
+            this.FillClientOrdersTable(this.rootFrame.orderDAO.gerOrders());
+            this.rootFrame.FillAllOrdersTable(this.rootFrame.orderDAO.gerOrders());
+        } catch (SQLException ex) {
+            Logger.getLogger(OrdersFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_calcerOrderMouseReleased
 
     /**
      * @param args the command line arguments
@@ -147,8 +210,10 @@ public class OrdersFrame extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton calcerOrder;
     private javax.swing.JTable clientOrders_table;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton setDelivered_btn;
     // End of variables declaration//GEN-END:variables
 }

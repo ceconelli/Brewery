@@ -85,9 +85,13 @@ public class AddressDAO {
     }
     
     public Address getAddress(String cpf){
+        System.out.println("cpf: " + cpf);
+        System.out.println("list: " + this.addressList.toString());
         for(Address a:this.addressList){
-//            System.out.println(a.toString());
-            if(a.getClient().getCpf() == cpf){
+            System.out.println("a: "+a.toString());
+            System.out.println("a.getClient(): "+a.getClient());
+            System.out.println("a.getClient().getCpf(): "+a.getClient().getCpf());
+            if(a.getClient().getCpf().equals(cpf)){
                 return a;
             }
         }

@@ -14,15 +14,17 @@ public class Order {
     private double amount;
     private double price;
     private Date date;
-    private boolean delivered;
+    private String delivered;
+    private int orderCode;
 
-    public Order(Client client, Beer beer, double amount, double price, Date date, boolean delivered) {
+    public Order(Client client, Beer beer, double amount, double price, Date date, String delivered, int orderCode) {
         this.client = client;
         this.beer = beer;
         this.amount = amount;
         this.price = price;
         this.date = date;
         this.delivered = delivered;
+        this.orderCode = orderCode;
     }
 
     public Client getClient() {
@@ -65,14 +67,24 @@ public class Order {
         this.date = date;
     }
 
-    public boolean isDelivered() {
+    public String isDelivered() {
         return delivered;
     }
 
-    public void setDelivered(boolean delivered) {
+    public void setDelivered(String delivered) {
         this.delivered = delivered;
     }
 
+    public int getOrderCode() {
+        return orderCode;
+    }
+
+    public void setOrderCode(int orderCode) {
+        this.orderCode = orderCode;
+    }
+
+    
+    
     @Override
     public String toString() {
         return "Order{" + "client=" + client + ", beer=" + beer + ", amount=" + amount + ", price=" + price + ", date=" + date + ", delivered=" + delivered + '}';

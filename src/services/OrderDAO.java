@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import models.Order;
 import utils.Utils;
 
@@ -38,7 +40,8 @@ public class OrderDAO {
                                          this.rs.getDouble("quantidade"),
                                          this.rs.getDouble("valor_pedido"),
                                          this.rs.getDate("data_pedido"),
-                                         this.rs.getBoolean("entrega")
+                                         this.rs.getString("entrega"),
+                                         this.rs.getInt("cod_pedido")
                                         ));
         }
     }
@@ -67,9 +70,28 @@ public class OrderDAO {
         return this.clientOrders;
     }
 
-    public void addOrder() {
-        String sql = "INSERT INTO pedido(cod_cliente,cod_cerveja,quantidade,valor_pedido)"
-                + "VALUES (";
+    public void addOrder(String clientCode,int beerCode,double amount) {
+        double orderCost = amount * this.beerDAO.getBeerByCode(beerCode).getPrice();
+//        String sql = "INSERT INTO pedido(cod_cliente,cod_cerveja,quantidade,valor_pedido)"
+//                + "VALUES ('" + clientCode + "'," + beerCode + "," + amount + "," + orderCost + ")";
+        String sql = "SELECT addPedido('" + clientCode + "'," + beerCode + "," + amount + "," + orderCost + ")";
+        try {
+//            Utils.executeSQLDml(_dbConnection, sql);
+            Utils.executeProc(this._dbConnection, sql);
+            this.gerOrders();
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void updateOrder(int orderCode,String newStatus) {
+        String sql = "UPDATE pedido SET entrega = '" + newStatus + "' where cod_pedido = " + orderCode + "";
+        try {
+            Utils.executeSQLDml(this._dbConnection, sql);
+            this.gerOrders();
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public Connection getDbConnection() {
