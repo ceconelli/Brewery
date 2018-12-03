@@ -26,6 +26,7 @@ import services.ClientDAO;
 import services.OrderDAO;
 import services.StockDAO;
 import services.StyleDAO;
+import utils.Utils;
 /**
  *
  * @author gceconelli
@@ -164,6 +165,8 @@ public class MainFrame extends javax.swing.JFrame {
         editBrandName_txtField = new javax.swing.JTextField();
         editBrandCode_txtField = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         styles_table = new javax.swing.JTable();
@@ -174,6 +177,8 @@ public class MainFrame extends javax.swing.JFrame {
         editStyleName_txtField = new javax.swing.JTextField();
         editStyleCode_txtField = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         clients_table = new javax.swing.JTable();
@@ -269,6 +274,10 @@ public class MainFrame extends javax.swing.JFrame {
 
         jLabel5.setText("Nome");
 
+        jLabel19.setText("Nome");
+
+        jLabel20.setText("Código");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -288,13 +297,18 @@ public class MainFrame extends javax.swing.JFrame {
                         .addContainerGap())))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(editBrandCode_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(editBrandCode_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel20))
                 .addGap(18, 18, 18)
-                .addComponent(editBrandName_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(edit_btn)
-                .addGap(18, 18, 18)
-                .addComponent(remove_btn)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel19)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(editBrandName_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(edit_btn)
+                        .addGap(18, 18, 18)
+                        .addComponent(remove_btn)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -307,13 +321,17 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(brandName_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel19)
+                    .addComponent(jLabel20))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(remove_btn)
                     .addComponent(edit_btn)
                     .addComponent(editBrandName_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(editBrandCode_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(287, Short.MAX_VALUE))
+                .addContainerGap(344, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Brands", jPanel1);
@@ -359,6 +377,10 @@ public class MainFrame extends javax.swing.JFrame {
 
         jLabel6.setText("Nome");
 
+        jLabel21.setText("Nome");
+
+        jLabel22.setText("Código");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -370,20 +392,25 @@ public class MainFrame extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(editStyleCode_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(editStyleName_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(editStyle_btn)
-                                .addGap(18, 18, 18)
-                                .addComponent(removeStyle_btn))
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel6)
                                 .addGroup(jPanel3Layout.createSequentialGroup()
                                     .addComponent(styleName_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(addStyle_btn))))))
+                                    .addComponent(addStyle_btn)))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(editStyleCode_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel22))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel21)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(editStyleName_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(editStyle_btn)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(removeStyle_btn)))))))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -398,11 +425,15 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel21)
+                    .addComponent(jLabel22))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(removeStyle_btn)
                     .addComponent(editStyle_btn)
                     .addComponent(editStyleName_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(editStyleCode_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(290, Short.MAX_VALUE))
+                .addContainerGap(342, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Styles", jPanel3);
@@ -706,7 +737,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(setAmount_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(setAmount_btn))
-                .addContainerGap(301, Short.MAX_VALUE))
+                .addContainerGap(373, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Beers", jPanel5);
@@ -778,7 +809,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(addOrder_btn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(365, Short.MAX_VALUE))
+                .addContainerGap(437, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Orders", jPanel6);
@@ -791,7 +822,7 @@ public class MainFrame extends javax.swing.JFrame {
         );
         jInternalFrame2Layout.setVerticalGroup(
             jInternalFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 620, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 692, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -814,6 +845,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         String styleName = this.styleName_txtField.getText();
         if (styleName.equals("")) {
+            JOptionPane.showMessageDialog(rootPane, "Field \"Nome\" can not be empty.");
             return;
         }
         try {
@@ -869,6 +901,10 @@ public class MainFrame extends javax.swing.JFrame {
         if(this.styles_table.getSelectedRow() != -1){
             DefaultTableModel model = (DefaultTableModel) this.styles_table.getModel();
             try {
+                if(this.editStyleName_txtField.getText().equals("")){
+                    JOptionPane.showMessageDialog(rootPane, "Field \"Nome\" can not be empty.");
+                    return;
+                }
                 this.styleDAO.updateStyle((int)model.getValueAt(this.styles_table.getSelectedRow(),0),this.editStyleName_txtField.getText());
                 this.FillStyleTable(this.styleDAO.getBeerStyleList());
             } catch (SQLException ex) {
@@ -887,6 +923,15 @@ public class MainFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Fill all fields");
             return;
         }
+        if(!utils.Utils.validateCPF(clientCpf)){
+            JOptionPane.showMessageDialog(rootPane, "CPF format not valid. Please insert a valid CPF");
+            return;
+        }
+        if(!utils.Utils.validateEmail(clientEmail)){
+            JOptionPane.showMessageDialog(rootPane, "Email format not valid. Please insert a valid Email");
+            return;
+        }
+        
         try {
             this.clientDAO.addClient(clientCpf, clientName, clientPhone, clientEmail);
             this.FillClientTable(this.clientDAO.getClientList());
@@ -972,6 +1017,10 @@ public class MainFrame extends javax.swing.JFrame {
         if(this.brands_table.getSelectedRow() != -1){
             DefaultTableModel model = (DefaultTableModel) this.brands_table.getModel();
             try {
+                if(this.editBrandName_txtField.getText().equals("")){
+                    JOptionPane.showMessageDialog(rootPane, "Field \"Nome\" can not be empty.");
+                    return;
+                }
                 this.brandDAO.updateBrand((int)model.getValueAt(this.brands_table.getSelectedRow(),0),this.editBrandName_txtField.getText());
                 this.FillBrandTable(this.brandDAO.getBrandList(),this.brands_table);
             } catch (SQLException ex) {
@@ -984,6 +1033,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         String brandName = this.brandName_txtField.getText();
         if (brandName.equals("")) {
+            JOptionPane.showMessageDialog(rootPane, "Field \"Nome\" can not be empty.");
             return;
         }
         try {
@@ -1238,7 +1288,11 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

@@ -33,4 +33,12 @@ public final class Utils {
         ps.executeQuery();
     }
     
+    
+    public static boolean validateCPF(String cpf){
+        return (cpf.matches("([0-9]{2}[\\.]?[0-9]{3}[\\.]?[0-9]{3}[\\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\\.]?[0-9]{3}[\\.]?[0-9]{3}[-]?[0-9]{2})"));
+    }
+    
+    public static boolean validateEmail(String email){
+        return email.matches("^[a-z0-9.]+@[a-z0-9]+\\.[a-z]+(\\.([a-z]+))?$");
+    }
 }
