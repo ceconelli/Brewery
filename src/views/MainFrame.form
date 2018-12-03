@@ -49,7 +49,7 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="jTabbedPane1" alignment="0" pref="692" max="32767" attributes="0"/>
+              <Component id="jTabbedPane1" alignment="0" pref="696" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
@@ -132,7 +132,7 @@
                               <Component id="editBrandName_txtField" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="editBrandCode_txtField" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="344" max="32767" attributes="0"/>
+                          <EmptySpace pref="348" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -298,7 +298,7 @@
                               <Component id="editStyleName_txtField" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="editStyleCode_txtField" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="342" max="32767" attributes="0"/>
+                          <EmptySpace pref="346" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -779,7 +779,7 @@
                               <Component id="setAmount_txtField" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="setAmount_btn" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="373" max="32767" attributes="0"/>
+                          <EmptySpace pref="377" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -986,7 +986,7 @@
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jScrollPane5" min="-2" pref="171" max="-2" attributes="0"/>
-                          <EmptySpace pref="437" max="32767" attributes="0"/>
+                          <EmptySpace pref="441" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1003,7 +1003,7 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel16">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Cod&#xed;go Cerveja"/>
+                    <Property name="text" type="java.lang.String" value="C&#xf3;digo Cerveja"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="addOrderAmount_txtField">

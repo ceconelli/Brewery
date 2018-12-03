@@ -36,7 +36,7 @@ public class OrdersFrame extends javax.swing.JFrame {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setLocation(this.rootFrame.getLocation());
         this.clientOrders_table.setDefaultEditor(Object.class, null);
-        this.FillClientOrdersTable(this.rootFrame.orderDAO.gerOrders());
+        this.FillClientOrdersTable(this.rootFrame.orderDAO.getOrders());
     }
 
     public void FillClientOrdersTable(ArrayList<Order> clientOrders){
@@ -150,8 +150,8 @@ public class OrdersFrame extends javax.swing.JFrame {
         System.out.println(model.getValueAt(this.clientOrders_table.getSelectedRow(),5));
         this.rootFrame.orderDAO.updateOrder((int) model.getValueAt(this.clientOrders_table.getSelectedRow(),5),"ENVIADO");
         try {
-            this.FillClientOrdersTable(this.rootFrame.orderDAO.gerOrders());
-            this.rootFrame.FillAllOrdersTable(this.rootFrame.orderDAO.gerOrders());
+            this.FillClientOrdersTable(this.rootFrame.orderDAO.getOrders());
+            this.rootFrame.FillAllOrdersTable(this.rootFrame.orderDAO.getOrders());
         } catch (SQLException ex) {
             Logger.getLogger(OrdersFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -167,8 +167,8 @@ public class OrdersFrame extends javax.swing.JFrame {
         System.out.println(model.getValueAt(this.clientOrders_table.getSelectedRow(),5));
         this.rootFrame.orderDAO.updateOrder((int) model.getValueAt(this.clientOrders_table.getSelectedRow(),5),"CANCELADO");
         try {
-            this.FillClientOrdersTable(this.rootFrame.orderDAO.gerOrders());
-            this.rootFrame.FillAllOrdersTable(this.rootFrame.orderDAO.gerOrders());
+            this.FillClientOrdersTable(this.rootFrame.orderDAO.getOrders());
+            this.rootFrame.FillAllOrdersTable(this.rootFrame.orderDAO.getOrders());
         } catch (SQLException ex) {
             Logger.getLogger(OrdersFrame.class.getName()).log(Level.SEVERE, null, ex);
         }

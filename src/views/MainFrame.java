@@ -141,7 +141,7 @@ public class MainFrame extends javax.swing.JFrame {
     public void FillAllOrdersTable(ArrayList<Order> allOrders){
         this.allOrders_table.setModel(new DefaultTableModel());
         String col[] = {"cod_cliente","cod_cerveja","quantidade","valor_pedido","data_pedido","entrega","cod_pedido"};
-        DefaultTableModel tableModel = new DefaultTableModel(col, 0);
+        DefaultTableModel tableModel = new DefaultTableModel(col, 5);
         this.allOrders_table.setModel(tableModel);
         for(Order order:allOrders){
             Object[] row = {order.getClient().getCpf(),order.getBeer().getCod_beer(),order.getAmount(),order.getPrice(),order.getDate(),order.isDelivered(),order.getOrderCode()};
@@ -331,7 +331,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(edit_btn)
                     .addComponent(editBrandName_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(editBrandCode_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(344, Short.MAX_VALUE))
+                .addContainerGap(348, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Brands", jPanel1);
@@ -433,7 +433,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(editStyle_btn)
                     .addComponent(editStyleName_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(editStyleCode_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(342, Short.MAX_VALUE))
+                .addContainerGap(346, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Styles", jPanel3);
@@ -737,14 +737,14 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(setAmount_txtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(setAmount_btn))
-                .addContainerGap(373, Short.MAX_VALUE))
+                .addContainerGap(377, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Beers", jPanel5);
 
         jLabel15.setText("CPF");
 
-        jLabel16.setText("Codígo Cerveja");
+        jLabel16.setText("Código Cerveja");
 
         jLabel17.setText("Quantidade");
 
@@ -809,7 +809,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(addOrder_btn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(437, Short.MAX_VALUE))
+                .addContainerGap(441, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Orders", jPanel6);
@@ -822,7 +822,7 @@ public class MainFrame extends javax.swing.JFrame {
         );
         jInternalFrame2Layout.setVerticalGroup(
             jInternalFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 692, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 696, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

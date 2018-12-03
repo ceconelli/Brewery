@@ -30,7 +30,7 @@ public class OrderDAO {
         this.clientOrders = new ArrayList<Order>();
         this.clientDAO = clientDAO;
         this.beerDAO = beerDAO;
-        this.gerOrders();
+        this.getOrders();
     }
     
     public void addToOrderList(ResultSet rs,ArrayList<Order> list) throws SQLException {
@@ -46,7 +46,7 @@ public class OrderDAO {
         }
     }
     
-    public ArrayList<Order> gerOrders() throws SQLException{
+    public ArrayList<Order> getOrders() throws SQLException{
         String sql = "select * from pedido";
         this.orderList.clear();
         this.rs = Utils.executeSQLquery(this._dbConnection, sql);
@@ -78,7 +78,7 @@ public class OrderDAO {
         try {
 //            Utils.executeSQLDml(_dbConnection, sql);
             Utils.executeProc(this._dbConnection, sql);
-            this.gerOrders();
+            this.getOrders();
         } catch (SQLException ex) {
             Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -88,7 +88,7 @@ public class OrderDAO {
         String sql = "UPDATE pedido SET entrega = '" + newStatus + "' where cod_pedido = " + orderCode + "";
         try {
             Utils.executeSQLDml(this._dbConnection, sql);
-            this.gerOrders();
+            this.getOrders();
         } catch (SQLException ex) {
             Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
